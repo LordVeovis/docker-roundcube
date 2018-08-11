@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  roundcube:
+    image: veovis/roundcube
+    restart: unless-stopped
+    volumes:
+      - /docker/mail/config.inc.php:/var/www/html/config/config.inc.php:ro
+      - /docker/mail/overlay:/root_overlay:ro
+      - roundcube:/var/www/html
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    depends_on:
+      - roundcube
+    volumes:
+      - /docker/mail/nginx-roundcube.conf:/etc/nginx/conf.d/default.conf:ro
+      - roundcube:/usr/share/nginx/html
+
+volumes:
+  roundcube:
