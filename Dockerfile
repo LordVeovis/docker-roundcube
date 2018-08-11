@@ -4,6 +4,11 @@ LABEL maintainer Veovis
 
 ENV version 1.3.7
 
+# install required modules
+RUN apk add --no-cache zlib-dev && \
+    docker-php-ext-install pdo_mysql zip && \
+    apk remove zlib-dev
+
 RUN wget -O - "https://github.com/roundcube/roundcubemail/releases/download/$version/roundcubemail-$version-complete.tar.gz" | tar -xvz && \
     find roundcubemail-$version -maxdepth 1 -exec mv {} . \; && \
     rmdir roundcubemail-$version && \
@@ -15,4 +20,4 @@ COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["php-fpm"]
 
-VOLUME /var/www/html/logs
+VOLUME /var/www/html
