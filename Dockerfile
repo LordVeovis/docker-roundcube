@@ -12,5 +12,7 @@ RUN wget -O - "https://github.com/roundcube/roundcubemail/releases/download/$ver
     chmod -R u+w logs temp
 
 COPY docker-entrypoint.sh /
-ENTRYPOINT /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["php-fpm"]
+
 VOLUME /var/www/html/logs

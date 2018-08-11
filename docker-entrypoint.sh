@@ -11,9 +11,9 @@ if [ -d "$ROOT_OVERLAY" ]; then
         while read i;
         do
             d=`dirname "$i"`
-            [ -d "$d" ] || mkdir "$d"
-            cp "$i" "$ROOT_WWW/"
+            [ -d "$ROOT_WWW/$d" ] || mkdir -p "$ROOT_WWW/$d"
+            cp "$i" "$ROOT_WWW/$i"
         done
 fi
 
-exec docker-php-entrypoint "$@"
+exec docker-php-entrypoint $@
