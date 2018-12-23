@@ -2,7 +2,7 @@ FROM php:7-fpm-alpine
 
 LABEL maintainer Veovis
 
-ENV version 1.3.7
+ENV version 1.3.2
 
 # install required modules
 RUN apk add --no-cache zlib-dev && \
