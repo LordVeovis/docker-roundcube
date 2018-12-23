@@ -5,9 +5,10 @@ LABEL maintainer Veovis
 ENV version 1.3.2
 
 # install required modules
-RUN apk add --no-cache zlib-dev && \
+RUN apk add libzip && \
+    apk add --no-cache --virtual _build zlib-dev libzip-dev && \
     docker-php-ext-install pdo_mysql zip && \
-    apk del zlib-dev
+    apk del _build
 
 # dl roundcube source code
 RUN wget -O - "https://github.com/roundcube/roundcubemail/releases/download/$version/roundcubemail-$version-complete.tar.gz" | tar -xvz && \
