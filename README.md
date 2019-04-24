@@ -11,9 +11,14 @@ Please checkout the git repository for a ready to use nginx.conf and docker-comp
 # Parameters
 
 ## Volumes
+
 * /var/www/html/config/config.inc.php: the configuration file of Roundcube
 * /root_overlay: the content of this folder will be merged with the stock roundcube of the image. This is where you put all plugins and skins and eventually modified roundcube source code.
 * /var/www/html: roundcube source code
+
+## Environment variables
+
+* MAX_UPLOAD_SIZE: the maximum size of a file upload, example: 20M
 
 # How to update
 
