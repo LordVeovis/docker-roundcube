@@ -17,6 +17,7 @@ if [ -d "$ROOT_OVERLAY" ]; then
         done
 fi
 
+# https://gist.github.com/smileart/4597fa6a8afdf659d1d6
 # param_1: string | param_2: file
 is_option_in_file () {
   if [ ! -z "$1" ] && [ ! -z "$2" ]; then
