@@ -6,9 +6,9 @@ ENV version 1.4.8
 
 # install required modules
 RUN set -xe; \
-    apk add --no-cache icu-libs libldap libpng libzip php7-pecl-imagick; \
+    apk add --no-cache icu-libs jq libldap libpng libzip php7-pecl-imagick; \
     apk add --no-cache --virtual _build icu-dev libpng-dev openldap-dev zlib-dev libzip-dev; \
-    docker-php-ext-install gd exif intl pdo_mysql sockets zip; \
+    docker-php-ext-install gd exif intl ldap pdo_mysql sockets zip; \
     apk del _build
 
 # install composer
