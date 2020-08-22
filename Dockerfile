@@ -2,10 +2,10 @@ FROM php:7-fpm-alpine
 
 LABEL maintainer Veovis
 
-ENV version 1.3.9
+ENV version 1.4.8
 
 # install required modules
-RUN apk add libzip && \
+RUN apk add --no-cache libzip && \
     apk add --no-cache --virtual _build zlib-dev libzip-dev && \
     docker-php-ext-install pdo_mysql zip && \
     apk del _build
