@@ -5,10 +5,17 @@ LABEL maintainer Veovis
 ENV version 1.4.8
 
 # install required modules
-RUN apk add --no-cache libzip && \
-    apk add --no-cache --virtual _build zlib-dev libzip-dev && \
-    docker-php-ext-install pdo_mysql zip && \
+RUN set -xe; \
+    apk add --no-cache icu-libs libldap libpng libzip php7-pecl-imagick; \
+    apk add --no-cache --virtual _build icu-dev libpng-dev openldap-dev zlib-dev libzip-dev; \
+    docker-php-ext-install gd exif intl pdo_mysql sockets zip; \
     apk del _build
+
+# install composer
+# https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
+RUN set -xe; \
+    wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --quiet; \
+    mv composer* /usr/local/bin/composer
 
 # dl roundcube source code
 RUN wget -O - "https://github.com/roundcube/roundcubemail/releases/download/$version/roundcubemail-$version-complete.tar.gz" | tar -xvz && \
