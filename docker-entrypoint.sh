@@ -55,9 +55,15 @@ ini_set_option () {
   fi
 }
 
+ini_set_option php_admin_value[file_uploads] On "$PHP_CONFIG"
+ini_set_option php_admin_value[session.auto_start] Off "$PHP_CONFIG"
+ini_set_option php_admin_value[mbstring.func_overload] 0 "$PHP_CONFIG"
+ini_set_option php_admin_value[pcre.backtrack_limit] 100000 "$PHP_CONFIG"
+
+
 if [ ! -z "$MAX_UPLOAD_SIZE" ]; then
-    ini_set_option php_admin_value[upload_max_filesize] $MAX_UPLOAD_SIZE $PHP_CONFIG
-    ini_set_option php_admin_value[post_max_size] $MAX_UPLOAD_SIZE $PHP_CONFIG
+    ini_set_option php_admin_value[upload_max_filesize] $MAX_UPLOAD_SIZE "$PHP_CONFIG"
+    ini_set_option php_admin_value[post_max_size] $MAX_UPLOAD_SIZE "$PHP_CONFIG"
 fi
 
 exec docker-php-entrypoint $@
