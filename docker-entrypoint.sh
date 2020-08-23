@@ -6,8 +6,6 @@ PHP_CONFIG=/usr/local/etc/php-fpm.d/www.conf
 COMPOSER_FILE="$ROOT_WWW"/composer.json
 
 if [ -n "$ROUNDCUBE_MODULES" ]; then
-  #jq '.require |= . + { "toto": "talprout" }' composer.json
-
   tmpf1=`mktemp`
   tmpf2=`mktemp`
   cp "$COMPOSER_FILE" "$tmpf1"
@@ -19,11 +17,11 @@ if [ -n "$ROUNDCUBE_MODULES" ]; then
     jq '.require |= . + { "'$name'": "'$version'" }' "$tmpf1" > "$tmpf2"
     mv "$tmpf2" "$tmpf1"
 
-    composer update $name
+    #composer update --no-dev $name
   done
 
   mv "$tmpf1" "$COMPOSER_FILE"
-  #composer install
+  composer update --no-dev
 fi
 
 if [ -d "$ROOT_OVERLAY" ]; then
