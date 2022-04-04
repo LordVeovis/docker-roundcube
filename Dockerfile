@@ -2,7 +2,7 @@ FROM php:7-fpm-alpine
 
 LABEL maintainer Veovis
 
-ENV version 1.4.8
+ENV version 1.4.13
 
 # install required modules
 RUN set -xe; \
