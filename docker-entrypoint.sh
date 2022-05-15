@@ -21,7 +21,7 @@ if [ -n "$ROUNDCUBE_MODULES" ]; then
   done
 
   mv "$tmpf1" "$COMPOSER_FILE"
-  composer update --no-dev
+  composer install --no-dev
 fi
 
 if [ -d "$ROOT_OVERLAY" ]; then

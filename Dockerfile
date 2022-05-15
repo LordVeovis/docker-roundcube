@@ -19,11 +19,12 @@ RUN set -xe; \
 
 # dl roundcube source code
 RUN set -xe; \
-    wget -O - "https://github.com/roundcube/roundcubemail/releases/download/$version/roundcubemail-$version-complete.tar.gz" | tar -xvz && \
-    find roundcubemail-$version -maxdepth 1 -exec mv {} . \; && \
-    rmdir roundcubemail-$version && \
-    chown -R www-data:www-data . && \
-    chmod -R a=rX . && \
+    wget -O - "https://github.com/roundcube/roundcubemail/releases/download/$version/roundcubemail-$version-complete.tar.gz" | tar -xvz; \
+    find roundcubemail-$version -maxdepth 1 -exec mv {} . \;; \
+    rmdir roundcubemail-$version; \
+    chown -R www-data:www-data .; \
+    chmod -R a=rX .; \
+    chmod +x bin; \
     chmod -R u+w logs temp
 
 COPY docker-entrypoint.sh /
