@@ -2,7 +2,7 @@ FROM php:7-fpm-alpine
 
 LABEL maintainer Veovis
 
-ENV version 1.4.13
+ENV version 1.5.2
 
 # install required modules
 RUN set -xe; \
@@ -18,7 +18,8 @@ RUN set -xe; \
     mv composer* /usr/local/bin/composer
 
 # dl roundcube source code
-RUN wget -O - "https://github.com/roundcube/roundcubemail/releases/download/$version/roundcubemail-$version-complete.tar.gz" | tar -xvz && \
+RUN set -xe; \
+    wget -O - "https://github.com/roundcube/roundcubemail/releases/download/$version/roundcubemail-$version-complete.tar.gz" | tar -xvz && \
     find roundcubemail-$version -maxdepth 1 -exec mv {} . \; && \
     rmdir roundcubemail-$version && \
     chown -R www-data:www-data . && \
