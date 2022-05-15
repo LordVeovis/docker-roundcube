@@ -5,6 +5,11 @@ ROOT_WWW=/var/www/html
 PHP_CONFIG=/usr/local/etc/php-fpm.d/www.conf
 COMPOSER_FILE="$ROOT_WWW"/composer.json
 
+# fix composer 2.2
+tmpf3=`mktemp`
+jq '.config |= . + { "allow-plugins": {"roundcube/plugin-installer": true}}' composer.json > $tmpf3
+mv $tmpf3 composer.json
+
 if [ -n "$ROUNDCUBE_MODULES" ]; then
   tmpf1=`mktemp`
   tmpf2=`mktemp`
@@ -16,12 +21,10 @@ if [ -n "$ROUNDCUBE_MODULES" ]; then
     echo 'Installing module ' $name
     jq '.require |= . + { "'$name'": "'$version'" }' "$tmpf1" > "$tmpf2"
     mv "$tmpf2" "$tmpf1"
-
-    #composer update --no-dev $name
   done
 
   mv "$tmpf1" "$COMPOSER_FILE"
-  composer install --no-dev
+  composer update
 fi
 
 if [ -d "$ROOT_OVERLAY" ]; then
