@@ -10,6 +10,8 @@ tmpf3=`mktemp`
 jq '.config |= . + { "allow-plugins": {"roundcube/plugin-installer": true}}' composer.json > $tmpf3
 mv $tmpf3 composer.json
 
+composer update --no-dev
+
 if [ -n "$ROUNDCUBE_MODULES" ]; then
   tmpf1=`mktemp`
   tmpf2=`mktemp`
@@ -24,7 +26,7 @@ if [ -n "$ROUNDCUBE_MODULES" ]; then
   done
 
   mv "$tmpf1" "$COMPOSER_FILE"
-  composer update
+  composer update --no-dev
 fi
 
 if [ -d "$ROOT_OVERLAY" ]; then
