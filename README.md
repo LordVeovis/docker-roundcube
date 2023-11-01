@@ -4,7 +4,7 @@
 A docker image for running roundcube
 
 # About
-This is a docker image based on php:7-fpm-alpine for compacity.
+This is a docker image based on php:8.1-fpm-alpine for compacity.
 
 Please checkout the git repository for a ready to use nginx.conf and docker-compose.yml.
 
@@ -24,4 +24,4 @@ Please checkout the git repository for a ready to use nginx.conf and docker-comp
 
 On the first run of this container, a volume is created with the content of /var/www/html, which contains the roundcube application and eventually modified files presents in /root_overlay. When this container is updated, the volumes associated to it are NOT recreated. This means that even if you run a new roundcube image, the roundcube website will not be updated. You have to destroy the volume for the update to really apply.
 
-For simple installations, the update process can be done with the following commands: `docker-compose down -v && docker-compose up -d`
+For simple installations, the update process can be done with the following commands: `docker compose down -v && docker compose up -d`

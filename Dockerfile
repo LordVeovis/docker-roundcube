@@ -1,14 +1,14 @@
-FROM php:7-fpm-alpine
+FROM php:8.1-fpm-alpine
 
 LABEL maintainer Veovis
 
-ENV version 1.5.2
+ENV version 1.6.4
 
 # install required modules
 RUN set -xe; \
-    apk add --no-cache icu-libs jq git libldap libpng libzip php7-pecl-imagick; \
+    apk add --no-cache icu-libs jq git libldap libpng libzip php81-pecl-imagick; \
     apk add --no-cache --virtual _build icu-dev libpng-dev openldap-dev zlib-dev libzip-dev; \
-    docker-php-ext-install gd exif intl ldap pdo_mysql sockets zip; \
+    docker-php-ext-install -j$(nproc) gd exif intl ldap pdo_mysql sockets zip; \
     apk del --no-cache _build
 
 # install composer
