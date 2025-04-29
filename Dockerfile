@@ -1,13 +1,14 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.4-fpm-alpine
 
-LABEL maintainer Veovis
+LABEL maintainer=Veovis
 
-ENV version 1.6.4
+ENV version=1.6.10
 
 # install required modules
+# hadolint ignore=DL3018
 RUN set -xe; \
-    apk add --no-cache icu-libs jq git libldap libpng libzip php81-pecl-imagick; \
-    apk add --no-cache --virtual _build icu-dev libpng-dev openldap-dev zlib-dev libzip-dev; \
+    apk add --no-cache icu-libs jq git libldap libpng libzip php84-pecl-imagick; \
+    apk add --no-cache --virtual _build icu-dev libpng-dev openldap-dev zlib-dev libzip-dev linux-headers; \
     docker-php-ext-install -j"$(nproc)" gd exif intl ldap pdo_mysql sockets zip; \
     apk del --no-cache _build
 
