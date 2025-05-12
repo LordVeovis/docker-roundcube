@@ -13,7 +13,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.23
       - run:
           name: Dockerfile Lint
           command: docker run --pull always --rm -i hadolint/hadolint hadolint --require-label maintainer:text --ignore DL3018 - < Dockerfile
