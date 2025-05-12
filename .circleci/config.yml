@@ -12,6 +12,7 @@ jobs:
     executor: docker-publisher
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Dockerfile Lint
           command: docker run --pull always --rm -i hadolint/hadolint hadolint --require-label maintainer:text --ignore DL3018 - < Dockerfile
