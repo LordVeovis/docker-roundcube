@@ -2,7 +2,7 @@ FROM php:8.4-fpm-alpine
 
 LABEL maintainer=Veovis
 
-ENV version=1.6.10
+ENV version=1.6.11
 
 # install required modules
 # hadolint ignore=DL3018
